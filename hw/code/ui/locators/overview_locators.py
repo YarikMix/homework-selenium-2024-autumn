@@ -1,0 +1,2 @@
+class OverviewPageLocators:
+    pass

@@ -1,6 +1,7 @@
 import time
 
 import allure
+from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
@@ -60,3 +61,10 @@ class BasePage(object):
 
     def find_invisible(self, locator, timeout=None) -> WebElement:
         return self.wait(timeout).until(EC.presence_of_element_located(locator))
+
+    def is_visible(self, locator, timeout=None):
+        try:
+            self.wait(timeout).until(EC.visibility_of_element_located(locator))
+            return True
+        except TimeoutException:
+            return False

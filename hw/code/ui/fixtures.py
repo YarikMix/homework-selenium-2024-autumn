@@ -4,6 +4,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+from ui.pages.budget_page import BudgetPage
 from ui.pages.overview_page import OverviewPage
 from ui.pages.audience_page import AudiencePage
 from ui.pages.main_page import MainPage
@@ -42,3 +43,9 @@ def overview_page(driver):
 def audience_page(driver):
     driver.get(AudiencePage.url)
     return AudiencePage(driver)
+
+
+@pytest.fixture()
+def budget_page(driver):
+    driver.get(BudgetPage.url)
+    return BudgetPage(driver)

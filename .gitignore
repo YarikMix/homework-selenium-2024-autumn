@@ -1,5 +1,6 @@
-.idea
-.pytest_cache
+.idea/
+.pytest_cache/
 *chromedriver*
-venv
+venv/
 .env
+__pycache__/

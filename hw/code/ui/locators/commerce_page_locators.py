@@ -68,7 +68,7 @@ class CommercePageLocators(BasePageLocators):
     )
     MARKERPLACE_BANNER = (
         By.XPATH,
-        "//*[contains(@class, 'MarketplaceTemplate_bannerWarpper__')]",
+        "//*[contains(@class, 'MarketplaceTemplate_bannerWrapper__')]",
     )
 
     CATEGORY_SELECT = (By.XPATH, "//*[contains(@class, 'vkuiCustomSelectInput')]")

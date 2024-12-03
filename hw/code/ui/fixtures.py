@@ -9,6 +9,7 @@ from ui.pages.overview_page import OverviewPage
 from ui.pages.audience_page import AudiencePage
 from ui.pages.main_page import MainPage
 from ui.pages.settings_page import SettingsPage
+from ui.pages.commerce_page import CommercePage
 
 
 @pytest.fixture()
@@ -56,3 +57,9 @@ def budget_page(driver):
 def settings_page(driver):
     driver.get(SettingsPage.url)
     return SettingsPage(driver)
+
+
+@pytest.fixture
+def commerce_page(driver, cabinet_page):
+    driver.get(CommercePage.url)
+    return CommercePage(driver=driver)

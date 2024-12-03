@@ -1,3 +1,5 @@
 .idea
 .pytest_cache
-hw/code/chromedriver.exe
+*chromedriver*
+venv
+.env

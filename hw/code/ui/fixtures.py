@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from ui.pages.budget_page import BudgetPage
+from ui.pages.company_page import CompanyPage
 from ui.pages.overview_page import OverviewPage
 from ui.pages.audience_page import AudiencePage
 from ui.pages.main_page import MainPage
@@ -56,3 +57,9 @@ def budget_page(driver):
 def settings_page(driver):
     driver.get(SettingsPage.url)
     return SettingsPage(driver)
+
+
+@pytest.fixture()
+def company_page(driver):
+    driver.get(CompanyPage.url)
+    return CompanyPage(driver)

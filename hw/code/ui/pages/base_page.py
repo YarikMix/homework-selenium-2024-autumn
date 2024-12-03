@@ -103,3 +103,6 @@ class BasePage(object):
         elem.click()
 
         return elem
+
+    def unfocus(self):
+        self.driver.execute_script('document.activeElement.blur()')

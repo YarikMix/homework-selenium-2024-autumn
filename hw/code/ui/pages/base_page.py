@@ -138,3 +138,8 @@ class BasePage(object):
     def hover(self, locator, timeout=5):
         elem = self.wait(timeout).until(EC.presence_of_element_located(locator))
         ActionChains(self.driver).move_to_element(elem).perform()
+
+    def fill_field(self, field, value):
+        elem = self.find(field)
+        elem.clear()
+        elem.send_keys(value)

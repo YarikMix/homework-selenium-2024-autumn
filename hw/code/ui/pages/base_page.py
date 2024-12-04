@@ -9,6 +9,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
 
+from .base_page_functionality import BasePageFunctionality
+from ui.locators.base_page_locators import BasePageLocators
+
+from functools import wraps
 
 class PageNotOpenedException(Exception):
     pass
@@ -36,7 +40,11 @@ class element_in_viewport(object):
         return driver.execute_script(script, elem)
 
 
-class BasePage(object):
+class BasePage(BasePageFunctionality):
+    url = 'https://ads.vk.com/'
+    locators = BasePageLocators()
+
+
     def __init__(self, driver):
         self.driver = driver
         self.is_opened()
@@ -64,10 +72,10 @@ class BasePage(object):
 
     @allure.step('Click')
     def click(self, locator, timeout=None) -> WebElement:
-        self.find(locator, timeout=timeout)
-        elem = self.wait(timeout).until(EC.element_to_be_clickable(locator))
-        elem.click()
-
+         self.find(locator, timeout=timeout)
+         elem = self.wait(timeout).until(EC.element_to_be_clickable(locator))
+         elem.click()
+         
     def clear(self, locator, timeout: float | None = None) -> WebElement:
         elem = self.find(locator, timeout)
         elem.clear()
@@ -143,3 +151,36 @@ class BasePage(object):
         elem = self.find(field)
         elem.clear()
         elem.send_keys(value)
+
+
+
+class PageWithView(BasePageFunctionality):
+    url = ""
+
+    def open_view(self, button_open_locator, sign_opening_locator):
+        self.click(button_open_locator)
+        self.find_with_check_visibility(sign_opening_locator)
+
+    def close_view(self, button_close_locator, sign_opening_locator):
+        self.click(button_close_locator)
+        self.find(sign_opening_locator, until_EC=EC.invisibility_of_element_located)
+
+
+# add_open_view add method open_view() to button by locator
+def add_open_view(sign_opening_locator):
+    def add_open_view_decorator(elem_getter):
+        @wraps(elem_getter)
+        def functionality(self, *args, **kwargs):
+            openable_elem_result = elem_getter(self, *args, **kwargs)
+
+            def open_view():
+                return self.open_view(openable_elem_result,
+                                      sign_opening_locator=sign_opening_locator)
+
+            openable_elem_result.open_view = open_view
+
+            return openable_elem_result
+
+        return functionality
+
+    return add_open_view_decorator

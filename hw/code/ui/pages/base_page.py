@@ -9,6 +9,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
 
+from .base_page_functionality import BasePageFunctionality
+from ui.locators.base_page_locators import BasePageLocators
+
 
 class PageNotOpenedException(Exception):
     pass
@@ -36,7 +39,11 @@ class element_in_viewport(object):
         return driver.execute_script(script, elem)
 
 
-class BasePage(object):
+class BasePage(BasePageFunctionality):
+    url = 'https://ads.vk.com/'
+    locators = BasePageLocators()
+
+
     def __init__(self, driver):
         self.driver = driver
         self.is_opened()

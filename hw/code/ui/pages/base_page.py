@@ -72,13 +72,10 @@ class BasePage(BasePageFunctionality):
 
     @allure.step('Click')
     def click(self, locator, timeout=None) -> WebElement:
-        try:
          self.find(locator, timeout=timeout)
          elem = self.wait(timeout).until(EC.element_to_be_clickable(locator))
          elem.click()
-        except:
-            print("LOCATOR NOT FOUND::", locator)
-
+         
     def clear(self, locator, timeout: float | None = None) -> WebElement:
         elem = self.find(locator, timeout)
         elem.clear()

@@ -16,7 +16,7 @@ def config(request):
     debug_log = request.config.getoption('--debug_log')
 
     users_list_path = environ.get("USERS_LIST_PATH", "D:/Github/homework-selenium-2024-autumn/hw/code/files/emails.txt")
-    keywords_path = environ.get("USERS_LIST_PATH", "D:/Github/homework-selenium-2024-autumn/hw/code/files/keywords.txt")
+    keywords_path = environ.get("KEYWORDS_PATH", "D:/Github/homework-selenium-2024-autumn/hw/code/files/keywords.txt")
 
     return {
         'browser': browser,

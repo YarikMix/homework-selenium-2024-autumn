@@ -11,6 +11,7 @@ LEADFORM_DESCRIPTION = 'Опрос 1'
 COMPANY_LEGAL_NAME = 'OOO VK'
 COMPANY_ADRESS = 'Москва, улица Арбат, дом 1'
 
+
 class TestLeadformPage(BaseCase):
     wait = WebDriverWait(driver, timeout=0)
 

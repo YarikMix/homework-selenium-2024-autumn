@@ -1,3 +1,5 @@
+import time
+
 from base import BaseCase
 from ui.pages.audience_page import AudiencePage, AudienceSource
 
@@ -42,6 +44,28 @@ class TestAudience(BaseCase):
         assert f'[auto] Список пользователей / {users_list_name}' in audiences
 
     def test_audience_from_existing_audience(self, audience_page: AudiencePage):
+        audience_page.open_audience_creation()
+
+        audience_name = 'EXISTING_AUDIENCE'
+        audience_page.set_audience_name(audience_name)
+        audience_page.open_sources_list()
+        audience_page.select_audience_source(AudienceSource.USERS_LIST)
+
+        users_list_name = "USER LIST"
+        users_list_type = "Email"
+        users_list_path = self.config['users_list_path']
+
+        audience_page.click_upload_new_users_list()
+
+        audience_page.load_new_users_list(users_list_name, users_list_type, users_list_path)
+        audience_page.submit_audience_source()
+        audience_page.wait_for_success_notify()
+        audience_page.submit_audience_creation()
+
+        audiences = audience_page.get_audiences()
+        assert len(audiences) == 1
+        assert audience_name in audiences
+
         audience_page.open_audience_creation()
 
         audience_name = 'AUDIENCE'

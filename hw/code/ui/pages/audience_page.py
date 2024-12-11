@@ -1,6 +1,7 @@
 from enum import Enum
 
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
+from selenium.webdriver.common.by import By
 
 from ui.locators.audience_locators import AudiencePageLocators
 from ui.pages.base_page import BasePage
@@ -29,6 +30,9 @@ class AudiencePage(BasePage):
         self.click(self.locators.NEW_USERS_LIST_TYPE_SELECT_ITEM(type))
         self.find_invisible(self.locators.NEW_USERS_LIST_FILE_INPUT).send_keys(file_name)
 
+    def click_upload_new_users_list(self):
+        self.click(self.locators.USERS_LIST_UPLOAD_NEW_UBTN)
+
     def submit_users_list_creation(self):
         self.click(self.locators.SUBMIT_BTN)
 
@@ -39,7 +43,7 @@ class AudiencePage(BasePage):
         return list(map(lambda users_list_name_element: users_list_name_element.text, self.find_all(self.locators.USERS_LIST_NAME)))
 
     def get_audiences(self):
-        return list(map(lambda audience_name_element: audience_name_element.text, self.find_all(self.locators.AUDIENCE_NAME_LOCATOR)))
+        return list(map(lambda audience_name_element: audience_name_element.text, self.find_all(self.locators.AUDIENCE_NAME_LOCATOR, 1)))
 
     def create_audience_from_list(self):
         self.click(self.locators.CREATE_AUDIENCE_FROM_LIST_CHECK)
@@ -48,7 +52,7 @@ class AudiencePage(BasePage):
         self.click(self.locators.left_menu.AUDIENCE_BTN)
 
     def open_audience_creation(self):
-        self.click(self.locators.CREATE_AUDIENCE_BTN)
+        self.click(self.locators.CREATE_AUDIENCE_BTN, 1)
 
     def set_audience_name(self, name: str):
         self.fill_in(self.locators.AUDIENCE_NAME_INPUT, name)
@@ -73,10 +77,10 @@ class AudiencePage(BasePage):
         self.click(self.locators.EXISTING_AUDIENCE_SELECT_ITEM(audience_name))
 
     def submit_audience_source(self):
-        self.find_all(self.locators.SUBMIT_BTN)[1].click()
+        self.find_all_presence(self.locators.SUBMIT_BTN)[1].click()
 
     def submit_audience_creation(self):
-        self.find_all(self.locators.SUBMIT_BTN)[0].click()
+        self.find(self.locators.SUBMIT_BTN, 1).click()
 
     def add_key_words(self, name: str, keywords: list[str],):
         self.fill_in(self.locators.KEYWORDS_NAME_INPUT, name)
@@ -85,3 +89,9 @@ class AudiencePage(BasePage):
         for keyword in keywords:
             keywords_textarea.send_keys(keyword)
             keywords_textarea.send_keys(Keys.ENTER)
+
+    def clear_users_lists(self):
+        for menu_btn in self.find_all(self.locators.USERS_LIST_MENU_LOCATOR):
+            hover = ActionChains(self.driver).move_to_element(menu_btn)
+            hover.perform()
+            self.find_all(self.locators.USERS_LIST_MENU_ITEM_BTN)[1].click()

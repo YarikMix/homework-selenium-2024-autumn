@@ -7,6 +7,9 @@ class AudiencePageLocators:
     left_menu = LeftMenuLocators()
 
     USERS_LIST_TAB_BTN = (By.ID, 'tab_audience.users_list')
+    USERS_LIST_MENU_LOCATOR = (By.CSS_SELECTOR, '[data-testid=audience-item-menu]')
+    USERS_LIST_MENU_ITEM_BTN = (By.CSS_SELECTOR, '[data-testid=dropdown-item]')
+    USERS_LIST_UPLOAD_NEW_UBTN = (By.ID, 'tab-create-from-user-list-new')
     CREATE_USERS_LIST_BTN = (By.CSS_SELECTOR, '[data-testid=download-list]')
     CREATE_AUDIENCE_FROM_LIST_CHECK = (By.XPATH, "//div[contains(text(), 'Создать аудиторию из списка')]")
     CREATE_AUDIENCE_BTN = (By.CSS_SELECTOR, '[data-testid=create-audience]')

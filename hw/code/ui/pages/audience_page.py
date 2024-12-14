@@ -1,7 +1,7 @@
 from enum import Enum
 
 from selenium.webdriver import Keys, ActionChains
-from selenium.webdriver.common.by import By
+
 
 from ui.locators.audience_locators import AudiencePageLocators
 from ui.pages.base_page import BasePage
@@ -43,7 +43,10 @@ class AudiencePage(BasePage):
         return list(map(lambda users_list_name_element: users_list_name_element.text, self.find_all(self.locators.USERS_LIST_NAME)))
 
     def get_audiences(self):
-        return list(map(lambda audience_name_element: audience_name_element.text, self.find_all(self.locators.AUDIENCE_NAME_LOCATOR, 1)))
+        return list(map(lambda audience_name_element: audience_name_element.text, self.find_all(self.locators.AUDIENCE_NAME_LOCATOR, 5000)))
+
+    def wait_for_audience_list(self):
+        self.find_all(self.locators.AUDIENCE_NAME_LOCATOR, 5000)
 
     def create_audience_from_list(self):
         self.click(self.locators.CREATE_AUDIENCE_FROM_LIST_CHECK)
@@ -52,7 +55,7 @@ class AudiencePage(BasePage):
         self.click(self.locators.left_menu.AUDIENCE_BTN)
 
     def open_audience_creation(self):
-        self.click(self.locators.CREATE_AUDIENCE_BTN, 1)
+        self.click(self.locators.CREATE_AUDIENCE_BTN, 5000)
 
     def set_audience_name(self, name: str):
         self.fill_in(self.locators.AUDIENCE_NAME_INPUT, name)
@@ -80,7 +83,8 @@ class AudiencePage(BasePage):
         self.find_all_presence(self.locators.SUBMIT_BTN)[1].click()
 
     def submit_audience_creation(self):
-        self.find(self.locators.SUBMIT_BTN, 1).click()
+        self.became_invisible(self.locators.CREATE_AUDIENCE_SOURCE_MODAL, 1)
+        self.find(self.locators.SUBMIT_BTN, 2).click()
 
     def add_key_words(self, name: str, keywords: list[str],):
         self.fill_in(self.locators.KEYWORDS_NAME_INPUT, name)
@@ -91,7 +95,18 @@ class AudiencePage(BasePage):
             keywords_textarea.send_keys(Keys.ENTER)
 
     def clear_users_lists(self):
-        for menu_btn in self.find_all(self.locators.USERS_LIST_MENU_LOCATOR):
+        for menu_btn in self.find_all_presence(self.locators.USERS_LIST_MENU_LOCATOR, 2000):
             hover = ActionChains(self.driver).move_to_element(menu_btn)
             hover.perform()
             self.find_all(self.locators.USERS_LIST_MENU_ITEM_BTN)[1].click()
+            self.find_all(self.locators.USERS_LIST_POPUP_ITEM_BTN, 1)[1].click()
+
+    def clear_audiences(self):
+        for menu_btn in self.find_all_presence(self.locators.AUDIENCE_MENU_LOCATOR, 2000):
+            hover = ActionChains(self.driver).move_to_element(menu_btn)
+            hover.perform()
+            self.find_all(self.locators.AUDIENCE_MENU_ITEM_BTN)[2].click()
+            self.find_all(self.locators.AUDIENCE_LIST_POPUP_ITEM_BTN, 1)[1].click()
+
+    def wait_audience_list_for_load(self):
+        self.became_invisible(self.locators.CREATE_AUDIENCE_SOURCE_MODAL, 5)

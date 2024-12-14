@@ -41,6 +41,9 @@ class BasePage(BasePageFunctionality):
     def find(self, locator, timeout=None):
         return self.wait(timeout).until(EC.presence_of_element_located(locator))
 
+    def find_visibility(self, locator, timeout=None):
+        return self.wait(timeout).until(EC.visibility_of_element_located(locator))
+
     def find_all(self, locator, timeout=None) -> list[WebElement]:
         return self.wait(timeout).until(EC.visibility_of_all_elements_located(locator))
 

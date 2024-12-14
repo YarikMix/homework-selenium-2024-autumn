@@ -10,6 +10,7 @@ class AudiencePageLocators:
     USERS_LIST_MENU_LOCATOR = (By.CSS_SELECTOR, '[data-testid=audience-item-menu]')
     USERS_LIST_MENU_ITEM_BTN = (By.CSS_SELECTOR, '[data-testid=dropdown-item]')
     USERS_LIST_UPLOAD_NEW_UBTN = (By.ID, 'tab-create-from-user-list-new')
+    USERS_LIST_POPUP_ITEM_BTN = (By.XPATH, '//div[contains(@class, "DeleteUsersListConfirm")]//button')
     CREATE_USERS_LIST_BTN = (By.CSS_SELECTOR, '[data-testid=download-list]')
     CREATE_AUDIENCE_FROM_LIST_CHECK = (By.XPATH, "//div[contains(text(), 'Создать аудиторию из списка')]")
     CREATE_AUDIENCE_BTN = (By.CSS_SELECTOR, '[data-testid=create-audience]')
@@ -27,6 +28,10 @@ class AudiencePageLocators:
     KEYWORDS_TEXTAREA = (By.CSS_SELECTOR, '.KeyPhrases_textarea__wzycT > textarea')
     EXISTING_AUDIENCE_SELECT = (By.CSS_SELECTOR, '.vkuiCustomSelect')
     EXISTING_USERS_LIST_SELECT = (By.CSS_SELECTOR, '.vkuiCustomSelect')
+    AUDIENCE_MENU_LOCATOR = (By.CSS_SELECTOR, '[data-testid=audience-item-menu]')
+    AUDIENCE_MENU_ITEM_BTN = (By.CSS_SELECTOR, '[data-testid=dropdown-item]')
+    AUDIENCE_LIST_POPUP_ITEM_BTN = (By.XPATH, '//div[contains(@class, "ModalConfirm_buttons")]//button')
+    CREATE_AUDIENCE_SOURCE_MODAL = (By.XPATH, '//div[contains(@class, "ModalRoot_overlay__")]')
 
     @staticmethod
     def EXISTING_AUDIENCE_SELECT_ITEM(audience_name):

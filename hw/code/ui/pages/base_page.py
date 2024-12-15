@@ -88,10 +88,11 @@ class BasePage(BasePageFunctionality):
             return False
 
     def scroll_click(self, locator, timeout=5) -> WebElement:
-        elem = self.find(locator, timeout=timeout)
-
+        self.find(locator, timeout=timeout)
         self.wait(timeout).until(EC.visibility_of_element_located(locator))
         elem: WebElement = self.wait(timeout).until(EC.element_to_be_clickable(locator))
+
+        self.wait(timeout).until(element_in_viewport(locator))
 
         elem.click()
 
@@ -165,3 +166,25 @@ def add_open_view(sign_opening_locator):
         return functionality
 
     return add_open_view_decorator
+
+
+class element_in_viewport(object):
+    def __init__(self, locator: tuple[str, str]):
+        self.locator = locator
+
+    def __call__(self, driver):
+        script = """
+                    var elem = arguments[0],
+                    box = elem.getBoundingClientRect(),
+                    cx = box.left + box.width / 2,
+                    cy = box.top + box.height / 2,
+                    e = document.elementFromPoint(cx, cy);
+                    for (; e; e = e.parentElement) {
+                    if (e === elem)
+                      return true;
+                    }
+                    return false;
+                """
+
+        elem = driver.find_element(*self.locator)
+        return driver.execute_script(script, elem)

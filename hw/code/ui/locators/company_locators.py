@@ -9,14 +9,19 @@ class CompanyPageLocators:
 
     CLOSE_HELP_MODAL_BTN_LOCATOR = (By.CSS_SELECTOR, '[role=button][aria-label=Закрыть]')
 
-    COMPANIES_DRAFTS = (By.CSS_SELECTOR, '[data-testid="drafts-button"]')
+    COMPANIES_TYPES_DROPDOWN = (By.CSS_SELECTOR, '[data-testid="tags-selector"]')
+    COMPANIES_DRAFTS = (By.XPATH, '//div[contains(@class, "TagSelector_menuList__")]/div[3]')
     COMPANY_DRAFT_NAME = (By.CSS_SELECTOR, '.nameCellContent_content__TyfEC > button')
+    SAVE_DRAFT_COMPANY_MODAL = (By.XPATH, '//div[contains(@class, "ModalRoot_overlay__")]')
+    SAVE_DRAFT_COMPANY_MODAL_CLOSE_BTN = (By.XPATH, '//div[contains(@class, "vkuiModalDismissButton")]')
 
     CREATE_COMPANY_BTN = (By.CSS_SELECTOR, '[data-testid="create-button"]')
     COMPANY_BUDGET_INPUT = (By.CSS_SELECTOR, '[data-testid="targeting-not-set"]')
     APPLY_COMPANY_TARGET_BTN = (By.XPATH, '//*[@id="footer"]/div/div/div[2]/div[2]/button')
     APPLY_COMPANY_GROUP_BTN = (By.XPATH, "//*[contains(@class, 'CreateFooter_footerContentGroup__Hm+Yd')]/div[2]/button[2]")
-    SAVE_COMPANY_BTN = (By.XPATH, "//*[contains(@class, 'CreateFooter_footerContentGroup__Hm+Yd')]/div[2]/button[1]")
+    NEXT_BTN = (By.XPATH, "//*[contains(@class, 'CreateFooter_footerContentGroup__Hm+Yd')]/div[2]/button[1]")
+    SAVE_COMPANY_BTN = (By.XPATH, "//span[contains(text(), 'Сохранить как черновик')]")
+    SAVE_DRAFT_COMPANY_BTN = (By.XPATH, "//button[contains(@class, 'ConfirmUsnavedChanges_button')]")
 
     SITE_COMPANY_TARGET = (By.CSS_SELECTOR, '[data-id="site_conversions"]')
     SITE_URL_INPUT = (By.CSS_SELECTOR, '[placeholder="Введите ссылку на сайт"]')

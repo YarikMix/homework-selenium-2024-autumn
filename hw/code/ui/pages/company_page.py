@@ -16,14 +16,19 @@ class CompanyPage(BasePage):
 
     def open_companies_list(self):
         self.click(self.locators.LOGO)
+        self.became_visible(self.locators.SAVE_DRAFT_COMPANY_MODAL)
+        self.click(self.locators.SAVE_DRAFT_COMPANY_MODAL_CLOSE_BTN)
+        self.became_invisible(self.locators.SAVE_DRAFT_COMPANY_MODAL)
+        self.click(self.locators.LOGO)
         self.click(self.locators.left_menu.COMPANIES_BTN)
 
     def open_companies_drafts(self):
+        self.click(self.locators.COMPANIES_TYPES_DROPDOWN)
         self.click(self.locators.COMPANIES_DRAFTS)
 
     def get_companies_drafts(self):
-        return map(lambda company_draft_name_element: company_draft_name_element.text,
-                   self.find_all(self.locators.COMPANY_DRAFT_NAME))
+        return list(map(lambda company_draft_name_element: company_draft_name_element.text,
+                   self.find_all(self.locators.COMPANY_DRAFT_NAME)))
 
     def open_company_creation(self):
         self.click(self.locators.CREATE_COMPANY_BTN)
@@ -74,38 +79,14 @@ class CompanyPage(BasePage):
         elem = self.find(self.locators.AD_SHORT_DECS_TEXTAREA)
         elem.send_keys(description)
 
+    def click_next(self):
+        self.click(self.locators.NEXT_BTN)
+
+    def click_logo(self):
+        self.click(self.locators.LOGO)
+
+    def confirm_draft_company(self):
+        self.click(self.locators.SAVE_DRAFT_COMPANY_BTN)
+
     def save_company(self):
         self.click(self.locators.SAVE_COMPANY_BTN)
-
-    def open_catalogs_dropdown(self):
-        self.click(self.locators.CATALOG_SELECT_LOCATOR)
-
-    def select_catalog(self, text):
-        self.click(self.locators.VK_UI_SELECT_ELEM(text))
-
-    def set_ad_carousel_desc(self, description: str):
-        self.fill_in(self.locators.AD_CAROUSEL_TEXTAREA, description)
-
-    def set_ad_card_desc(self, description: str):
-        self.fill_in(self.locators.AD_CARD_TEXTAREA, description)
-
-    def public_company(self):
-        self.click(self.locators.PUBLIC_LOCATOR)
-
-    def wait_for_company_load(self):
-        self.find(self.locators.CREATE_COMPANY_BTN, 200)
-
-    def open_public_dropdown(self):
-        self.click(self.locators.COMPANY_SELECT_PUBLIC_BTN)
-
-    def open_public_another_btn(self):
-        self.find(self.locators.ANOTHER_PUBLIC_BTN)
-
-    def set_add_public_modal(self, description: str):
-        self.fill_in(self.locators.ADD_PUBLIC_INPUT, description)
-
-    def click_add_public_btn(self):
-        self.click(self.locators.ADD_PUBLIC_BTN)
-
-    def open_price_dropdown(self):
-        self.click(self.locators.PRICE_DROPDOWN)

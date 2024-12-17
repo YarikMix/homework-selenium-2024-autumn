@@ -1,5 +1,4 @@
 from base import NoAuthCase
-from ui.fixtures import main_page
 
 
 class TestMainPage(NoAuthCase):

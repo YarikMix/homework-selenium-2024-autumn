@@ -14,10 +14,8 @@ from ui.pages.audience_page import AudiencePage
 from ui.pages.main_page import MainPage
 from ui.pages.settings_page import SettingsPage
 from ui.pages.commerce_page import CommercePage
-from ui.pages.registration_main_page import RegistrationMainPage
 from ui.pages.leadforms_page import LeadFormsPage
 from ui.pages.survey_page import SurveyPage
-from ui.pages.leadform_page import LeadformPage
 from ui.pages.sites_page import SitePage
 
 
@@ -90,22 +88,18 @@ def auth_page(driver):
 def credentials_without_cabinet():
     return os.getenv("NEW_LOGIN"), os.getenv("NEW_PASSWORD")
 
-@pytest.fixture
-def registration_main_page(driver, credentials_without_cabinet, auth_page):
-    driver.get(RegistrationMainPage.url)
-    auth_page.login(*credentials_without_cabinet)
-    return RegistrationMainPage(driver=driver)
-
 
 @pytest.fixture
 def site_page(driver):
     driver.get(SitePage.url)
     return SitePage(driver=driver)
 
+
 @pytest.fixture
 def leadforms_page(driver):
     driver.get(LeadFormsPage.url)
     return LeadFormsPage(driver=driver)
+
 
 @pytest.fixture
 def surveys_page(driver, cabinet_page):

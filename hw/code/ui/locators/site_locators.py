@@ -15,6 +15,7 @@ class SitePageLocators:
     EMAIL_INPUT = (By.XPATH, '//input[@placeholder="Email владельца"]')
     DOMAIN_INPUT = (By.XPATH, '//input[@placeholder="Домен сайта"]')
     PIXEL_HREF_LINK = (By.XPATH, '//a[contains(@href="/hq/pixels")]')
+    PIXEL_LIST_ITEM = (By.XPATH, '//div[@class="BaseTable__body"]//div[contains(@class, "BaseTable__row")]/div[@class="BaseTable__row-cell"][1]//div[@class="vkuiSimpleCell__content"][1]//span[1]')
 
     BUTTON_ADD_PIXEL = (By.XPATH, "//button[contains(@class, 'vkuiButton')]")
     BUTTON_CREATE_NEW_PIXEL = (By.XPATH, "//span[text()='Добавить пиксель']")

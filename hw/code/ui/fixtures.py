@@ -16,6 +16,7 @@ from ui.pages.settings_page import SettingsPage
 from ui.pages.commerce_page import CommercePage
 from ui.pages.registration_main_page import RegistrationMainPage
 from ui.pages.leadform_page import LeadformPage
+from ui.pages.sites_page import SitePage
 
 
 @pytest.fixture()
@@ -97,3 +98,9 @@ def registration_main_page(driver, credentials_without_cabinet, auth_page):
 def leadform_page(driver, home_page):
     driver.get(LeadformPage.url)
     return LeadformPage(driver=driver)
+
+
+@pytest.fixture
+def site_page(driver):
+    driver.get(SitePage.url)
+    return SitePage(driver=driver)

@@ -2,4 +2,5 @@
 .pytest_cache/
 *chromedriver*
 venv/
+.env
 __pycache__/

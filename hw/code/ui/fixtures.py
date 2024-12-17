@@ -9,7 +9,6 @@ import os
 from ui.pages.auth_page import AuthPage
 from ui.pages.budget_page import BudgetPage
 from ui.pages.company_page import CompanyPage
-from ui.pages.overview_page import OverviewPage
 from ui.pages.audience_page import AudiencePage
 from ui.pages.main_page import MainPage
 from ui.pages.settings_page import SettingsPage
@@ -43,12 +42,6 @@ def main_page(driver):
 
 
 @pytest.fixture()
-def overview_page(driver):
-    driver.get(OverviewPage.url)
-    return OverviewPage(driver)
-
-
-@pytest.fixture()
 def audience_page(driver):
     driver.get(AudiencePage.url)
     return AudiencePage(driver)
@@ -70,7 +63,6 @@ def settings_page(driver):
 def commerce_page(driver, auth_page):
     driver.get(CommercePage.url)
     return CommercePage(driver=driver)
-
 
 
 @pytest.fixture()
@@ -102,6 +94,6 @@ def leadforms_page(driver):
 
 
 @pytest.fixture
-def surveys_page(driver, cabinet_page):
+def survey_page(driver):
     driver.get(SurveyPage.url)
     return SurveyPage(driver=driver)

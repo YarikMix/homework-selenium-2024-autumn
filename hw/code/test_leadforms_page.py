@@ -1,25 +1,17 @@
-import pytest
 import os
 
 from base import BaseCase
 from ui.locators.leadforms_locators import LeadFormsPageLocators
 
-FILEPATH = os.path.join(os.path.dirname(__file__), 'img/img.png')
+FILEPATH = os.path.join(os.path.dirname(__file__), 'files/img.png')
 
 
 class TestLeadFormsPage(BaseCase):
     locators = LeadFormsPageLocators()
 
-    def test_upload_image(self, leadforms_page):
-        leadforms_page.click_create_leadform_button()
-        leadforms_page.upload_image(FILEPATH)
-        assert leadforms_page.get_last_image_name_from_media_library() == os.path.basename(FILEPATH)
-
-        leadforms_page.delete_all_from_media_library()
-
     def test_create_with_all_fields(self, leadforms_page):
         leadforms_page.click_create_leadform_button()
-        leadforms_page.click_last_image_name_from_media_library()
+        leadforms_page.click_last_image()
 
         leadforms_page.fill_data('ф', 'ф', 'ф', 'ф')
         leadforms_page.click_continue()

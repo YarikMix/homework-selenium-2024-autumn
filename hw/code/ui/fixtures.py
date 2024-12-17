@@ -1,6 +1,7 @@
 from os import environ
 
 import pytest
+from dotenv import load_dotenv, find_dotenv
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -32,7 +33,8 @@ def driver(config):
 
 @pytest.fixture(scope='session')
 def credentials():
-    return environ.get("MAIL_LOGIN"), environ.get("MAIL_PASSWORD")
+    load_dotenv(find_dotenv())
+    return environ.get("LOGIN"), environ.get("PASSWORD")
 
 
 @pytest.fixture()

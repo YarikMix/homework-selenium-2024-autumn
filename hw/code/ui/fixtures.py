@@ -78,11 +78,6 @@ def auth_page(driver):
     return AuthPage(driver=driver)
 
 
-@pytest.fixture(scope="session")
-def credentials_without_cabinet():
-    return os.getenv("NEW_LOGIN"), os.getenv("NEW_PASSWORD")
-
-
 @pytest.fixture
 def site_page(driver):
     driver.get(SitePage.url)

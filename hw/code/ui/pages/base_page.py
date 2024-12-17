@@ -13,6 +13,7 @@ from ui.locators.base_page_locators import BasePageLocators
 
 from functools import wraps
 
+
 class PageNotOpenedException(Exception):
     pass
 

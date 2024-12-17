@@ -10,6 +10,11 @@ class CommercePageLocators(BasePageLocators):
 
     SIDEBAR = (By.XPATH, "//*[contains(@class, 'ModalSidebarPage_')]")
 
+    MODAL_CREATE_BUTTON = (
+        By.XPATH,
+        "//*[contains(@class, 'ModalSidebarPage_')]//*[contains(@class, 'vkuiButton__content') and text()='Создать каталог']",
+    )
+
     NEW_CATALOG_H2 = (
         By.XPATH,
         "//*[contains(@class, 'vkuiTitle--level-2') and text()='Новый каталог']",
@@ -37,3 +42,4 @@ class CommercePageLocators(BasePageLocators):
         "//*[contains(@class, 'vkuiCheckbox')]//*[contains(@class, 'vkuiCheckbox__titleBefore') and text()='Автоматически удалять UTM-метки']",
     )
 
+    BUTTON_CLOSE_MODAL = (By.XPATH, '//div[@aria-label="Закрыть"]')

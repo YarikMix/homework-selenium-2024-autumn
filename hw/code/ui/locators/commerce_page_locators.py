@@ -113,6 +113,6 @@ class CommercePageLocators(BasePageLocators):
 
     STOCK_ITEM_NAME = (By.XPATH, "//*[contains(@class, '_itemName_')]")
 
-    # Цены хранятся в span без классов, но это не единственные такие спаны, надо ещё отфильтровать по тому, что он в строке таблицы
-    STOCK_ITEM_PRICE = (By.XPATH,
-                        "//*[contains(@class, 'BaseTable__table-main')]//*[contains(@class, 'TableWrap_tableRow')]//*[not(@class)]")
+    STOCK_ITEM_PRICE = (By.XPATH, "//*[contains(@class, 'BaseTable__table-main')]//*[contains(@class, 'TableWrap_tableRow')]//*[not(@class)]")
+
+    BUTTON_CLOSE_MODAL = (By.XPATH, '//div[@aria-label="Закрыть"]')

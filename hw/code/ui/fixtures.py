@@ -60,7 +60,7 @@ def settings_page(driver):
 
 
 @pytest.fixture
-def commerce_page(driver, auth_page):
+def commerce_page(driver):
     driver.get(CommercePage.url)
     return CommercePage(driver=driver)
 

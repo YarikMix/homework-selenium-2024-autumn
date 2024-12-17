@@ -73,3 +73,7 @@ class SurveyLocators(BasePageLocators):
     ARCHIVE_ACCEPT_BUTTON = (By.XPATH, "//span[contains(text(), 'Архивировать')]")
 
     FIRST_SURVAY_NAME = (By.XPATH, "(//h5[contains(@data-testid, 'lead_form_name__')])[1]")
+
+    UPLOAD_IMAGE_MODAL = (By.XPATH, "(//div[contains(@class, 'ModalSidebarPage_control')])[2]")
+
+    FIRST_LEAD_FORM_NAME = (By.XPATH, "(//h5[contains(@data-testid, 'lead_form_name__')])[1]")

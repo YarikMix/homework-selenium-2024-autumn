@@ -24,6 +24,7 @@ class LeadFormsPage(BasePage):
         self.click(self.locators.LOAD_IMAGE_BUTTON)
         self.hover(self.locators.UPLOADED_IMAGE_ITEM)
         self.click(self.locators.UPLOADED_IMAGE_NAME)
+        self.became_invisible(self.locators.UPLOAD_IMAGE_MODAL)
 
     def click_continue(self):
         self.click(self.locators.CONTINUE_BUTTON)
@@ -190,3 +191,19 @@ class LeadFormsPage(BasePage):
     def remove_lead_form(self):
         self.click(self.locators.ARCHIVE_BUTTON)
         self.click(self.locators.ARCHIVE_ACCEPT_BUTTON)
+
+    def get_last_image_name_from_media_library(self) -> str:
+        self.hover(self.locators.UPLOADED_IMAGE_ITEM)
+        return self.find(self.locators.UPLOADED_IMAGE_NAME).text
+
+    def click_last_image_name_from_media_library(self):
+        self.click(self.locators.LOAD_IMAGE_BUTTON)
+        self.hover(self.locators.UPLOADED_IMAGE_ITEM)
+        self.click(self.locators.UPLOADED_IMAGE_NAME)
+        self.became_invisible(self.locators.UPLOAD_IMAGE_MODAL)
+
+    def delete_all_from_media_library(self):
+        self.click(self.locators.EDIT_IMAGES_BUTTON)
+        self.click(self.locators.SELECT_ALL_IMAGES_BUTTON)
+        self.click(self.locators.DELETE_IMAGES_BUTTON)
+        self.click(self.locators.CONFIRM_DELETE_BUTTON)

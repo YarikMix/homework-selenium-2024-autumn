@@ -15,6 +15,8 @@ from ui.pages.main_page import MainPage
 from ui.pages.settings_page import SettingsPage
 from ui.pages.commerce_page import CommercePage
 from ui.pages.registration_main_page import RegistrationMainPage
+from ui.pages.leadforms_page import LeadFormsPage
+from ui.pages.survey_page import SurveyPage
 from ui.pages.leadform_page import LeadformPage
 from ui.pages.sites_page import SitePage
 
@@ -33,7 +35,7 @@ def driver(config):
 
 @pytest.fixture(scope='session')
 def credentials():
-    return (environ.get("MAIL_LOGIN"), environ.get("MAIL_PASSWORD"))
+    return environ.get("MAIL_LOGIN"), environ.get("MAIL_PASSWORD")
 
 
 @pytest.fixture()
@@ -67,7 +69,7 @@ def settings_page(driver):
 
 
 @pytest.fixture
-def commerce_page(driver, cabinet_page):
+def commerce_page(driver, auth_page):
     driver.get(CommercePage.url)
     return CommercePage(driver=driver)
 
@@ -94,13 +96,18 @@ def registration_main_page(driver, credentials_without_cabinet, auth_page):
     auth_page.login(*credentials_without_cabinet)
     return RegistrationMainPage(driver=driver)
 
-@pytest.fixture
-def leadform_page(driver, home_page):
-    driver.get(LeadformPage.url)
-    return LeadformPage(driver=driver)
-
 
 @pytest.fixture
 def site_page(driver):
     driver.get(SitePage.url)
     return SitePage(driver=driver)
+
+@pytest.fixture
+def leadforms_page(driver):
+    driver.get(LeadFormsPage.url)
+    return LeadFormsPage(driver=driver)
+
+@pytest.fixture
+def surveys_page(driver, cabinet_page):
+    driver.get(SurveyPage.url)
+    return SurveyPage(driver=driver)
